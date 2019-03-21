@@ -1,68 +1,105 @@
-//(function ($, window, document, undefined) {
+//Everything is loaded before the functions
+$(document).ready(function () {
 
-// define array of words to choose from in game
+    //create a variable with array for alphabet
 
-var randomFruitArr = ["apple", "banana", "pear", "cherry", "strawberry", "peach", "lemon", "avocado", "grapes", "mango"];
+    var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+        'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+        't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-/*This chooses a random word from the array/ Math.floor = A number representing the largest integer less than or equal to the specified number. Math.random = A floating-point, pseudo-random number between 0 (inclusive) and 1 (exclusive). */
+    //create variables with array for selected words
 
-var randomFruit = randomFruitArr[Math.floor(Math.random() * randomFruitArr.length)];
+    var word = ["apple", "banana", "pear", "cherry", "strawberry", "peach", "lemon", "avocado", "grapes", "mango"];
 
-/*JavaScript has two scopes – global and local. Any variable declared outside of a function belongs to the global scope, and is therefore accessible from anywhere in your code. Each function has its own scope, and any variable declared within that function is only accessible from that function and any nested functions.*/
-//here are some global scopes
+    //create a variables for guesses and stored guesses
 
-var s;
-var count = 0;
-//empty array to store guesses
-var answerArray = [];
+    var guess;
+    var guessStored;
 
+    //create a variable for lives 
 
-//fill the array with underscores, which will match the number of letters in the word
+    var lives;
 
-function startUp() {
+    //create a variable for counting the correct guesses
 
-    for (var i = 0; i < randomFruit.length; i++) {
-        answerArray[i] = "_";
-    }
+    var liveCount;
 
-    //put them in a string
+    //create a variable for number of spaces in a word
 
-    s = answerArray.join(" ");
-    document.getElementById("answer").innerHTML = s;
-}
+    var space;
+    //create an element for lives
 
-//Get the letter the user put in the box
+    var showLives = document.getElementById("mylives");
 
-function Letter() {
-    var letter = document.getElementById("letter").value;
+    //create alphabet list ul
 
-    if (letter.length > 0);
-    {
-        for (var i = 0; i < randomFruit.length; i++) {
+    var abcButtons = function () {
+        myButtons = document.getElementById("abcButtons");
+        letters = document.createElement("ul");
 
-            //if user answers letter in word
-
-            if (randomFruit[i] === letter) {
-
-                //assign it to letter
-                answerArray[i] = letter;
-            }
-
+        for (var i = 0; i < alphabet.length; i++) {
+            letters.id = "alphabet";
+            list = document.createElement("li");
+            list.id = "letter";
+            list.innerHTML = alphabet[i];
+            check();
+            myButtons.appendChild(letters);
+            letters.appendChild(list);
         }
-        //how many times it takes to guess
-
-        count++;
-        document.getElementById("counter").innerHTML = "No. of clicks: " + count;
-        document.getElementById("answer").innerHTML = answerArray.join(" ");
-
     }
 
 
+    // /*This chooses a random word from the array/ Math.floor = A number representing the largest integer less than or equal to the specified number. Math.random = A floating-point, pseudo-random number between 0 (inclusive) and 1 (exclusive). */
+
+    // var randomFruit = randomFruitArr[Math.floor(Math.random() * randomFruitArr.length)];
+
+    // /*JavaScript has two scopes – global and local. Any variable declared outside of a function belongs to the global scope, and is therefore accessible from anywhere in your code. Each function has its own scope, and any variable declared within that function is only accessible from that function and any nested functions.*/
+    // //here are some global scopes
+
+    // var s;
+    // var count = 0;
+    // //empty array to store guesses
+    // var answerArray = [];
 
 
+    // //fill the array with underscores, which will match the number of letters in the word
 
+    // function startUp() {
 
+    //     for (var i = 0; i < randomFruit.length; i++) {
+    //         answerArray[i] = "_";
+    //     }
 
+    //     //put them in a string
 
+    //     s = answerArray.join(" ");
+    //     document.getElementById("answer").innerHTML = s;
+    // }
 
-//    }) (jQuery, window, document);
+    // //Get the letter the user put in the box
+
+    // function Letter() {
+    //     var letter = document.getElementById("letter").value;
+
+    //     if (letter.length > 0);
+    //     {
+    //         for (var i = 0; i < randomFruit.length; i++) {
+
+    //             //if user answers letter in word
+
+    //             if (randomFruit[i] === letter) {
+
+    //                 //assign it to letter
+    //                 answerArray[i] = letter;
+    //             }
+
+    //         }
+    //         //how many times it takes to guess
+
+    //         count++;
+    //         document.getElementById("counter").innerHTML = "No. of clicks: " + count;
+    //         document.getElementById("answer").innerHTML = answerArray.join(" ");
+
+    //     }
+
+    // }
