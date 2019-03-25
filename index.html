@@ -13,38 +13,43 @@
 </head>
 
 <body body background="./assests/images/ep_naturalwhite/ep_naturalwhite.png" ;>
-
-
-
-
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>Word Guess Game</h1>
+        <div class="jumbotron">
+            <h1>Word Guess Game</h1>
+            <p>Press Any Key to Get Started!</p>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"> Word to Guess</h3>
+            </div>
+            <div class="panel-body">
+                <h2 id="wordToGuess">_ _ _ _ _ _ _ _</h2>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
-            <img src="./assests/images/pexels-photo-1591370.jpeg" alt="background beach" style="width: 100%;" ;>
-            <div class="textimg">
-                <p>You guessed it! Just guess the correct letters of a word and you WIN!</p>
-                <p> Click HERE for further Instructions or Click Start Game button below to play game</p>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                Wrong Guesses: <span id="wrongGuesses"></span>
             </div>
         </div>
-        <div class="col-lg-2">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                Guesses Left: <span id="numGuesses"></span>
+            </div>
         </div>
-    </div>
-    <br>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                Win Counter: <span id="winCounter"></span>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                Loss Counter: <span id="lossCounter"></span>
+            </div>
+        </div>
 
-    <div class="container" style="width: 180px;">
 
-        <button type="button" class="btn btn-btn-lg" id="startbutton">START
-            GAME</button>
-    </div>
-    <script text="javascript" src="./assests/javascript/game.js"></script>
+        <script type="text/javascript" src="./assests/javascript/game.js"></script>
 
 </body>
 

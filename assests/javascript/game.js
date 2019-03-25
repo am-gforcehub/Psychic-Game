@@ -1,54 +1,118 @@
-//Everything is loaded before the functions
-// $(document).ready(function () {
-//window.onload = function () {
+//Global Variables
 
-//create a variable with array for alphabet
+//Arrays and Variables for holding data
 
-var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-    'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-    't', 'u', 'v', 'w', 'x', 'y', 'z'];
+//Array for choosen words
+var wordOptions = ["apple", "banana", "pear", "cherry", "strawberry", "peach", "lemon", "avocado", "grapes", "mango"];
 
-//create variables with array for selected words
+//Array that is blank so it can hold the choosen word at a later time
+var choosenWord = "";
 
-var word = ["apple", "banana", "pear", "cherry", "strawberry", "peach", "lemon", "avocado", "grapes", "mango"];
+//Determine what letters are in the word
+var lettersinWord = [];
 
-//create a variables for guesses and stored guesses
+//Need to calculate the number of spaces in the word
+var numSpaces = 0;
 
-var guess;
-var guessStored;
+//Array that holds the spaces and successful number of guesses
+var spacesandSuccesses = [];
 
-//create a variable for lives 
+//Array for wrong guesses
+var wrongLetters = [];
 
-var lives;
+//Game Counters
+var winCount = 0;
+var lossCount = 0;
+var guessesLeft = 9;
 
-//create a variable for counting the correct guesses
+//Functions (make something happen)
 
-var liveCount;
+//Function for start of game; randomly selects words from wordOption array to start
+function startGame() {
+    choosenWord = wordOptions[Math.floor(Math.random() * wordOptions.length)];
+    //Need  to break word apart into individual letters; allows to have an array of individual letters
+    lettersinWord = choosenWord.split("");
+    //Need to get number of letters in each word
+    numSpaces = lettersinWord.length;
+    //Needs to reset guesses back to 9 and wrong gusses back to 0 (cleared)
+    guessesLeft = 9;
+    wrongLetters = [];
+    spacesandSuccesses = [];
 
-//create a variable for number of spaces in a word
+    //Populate spaces and successes with right number of blanks to do this use a for loop
+    for (i = 0; i < numSpaces; i++) {
+        spacesandSuccesses.push(" ");
+    }
 
-var space;
-//create an element for lives
+    //Change HTML to reflect amount of spaces for each word choosen, how many guesses are left, win count and loss count
 
-var showLives = document.getElementById("mylives");
+    document.getElementById("wordToGuess").innerHTML = spacesandSuccesses.join("_");
+    document.getElementById("numGuesses").innerHTML = guessesLeft;
+    document.getElementById("winCounter").innerHTML = winCount;
+    document.getElementById("lossCounter").innerHTML = lossCount;
 
-//create alphabet list ul
+    console.log(numSpaces);
+    console.log(lettersinWord);
+    console.log(choosenWord);
+    console.log(spacesandSuccesses);
 
-var buttons = function () {
-    myButtons = document.getElementById("buttons");
-    letters = document.createElement("ul");
+    //Create comparitor logic to check is letters clicked are the letters in the word
 
-    for (var i = 0; i < alphabet.length; i++) {
-        letters.id = "alphabet";
-        list = document.createElement("li");
-        list.id = "letter";
-        list.innerHTML = alphabet[i];
-        check();
-        myButtons.appendChild(letters);
-        letters.appendChild(list);
+    function checkLetters(letter) {
+        //check is the letter exists anywhere in the word 
+        var isLetterInWord = false;
+        //create a for loop to see if the letter selected matches any letter in word
+        for (i = 0; i < numSpaces; i++) {
+            if (choosenWord[i] == letter) {
+                isLetterInWord = true;
+            }
+        }
+
+        //Check where in the word the letter exists, then populate the spacesandsucceses array
+        if (isLetterInWord) {
+            for (i = 0; i < numSpaces; i++) {
+                if (choosenWord[i] == letter) {
+                    spacesandSuccesses[i] = letter;
+                }
+            }
+        }
+        //letter wasnt found in word
+
+        else {
+            wrongLetters.push(letter);
+            guessesLeft--
+        }
+
+        console.log(spacesandSuccesses);
+
+    }
+
+    function roundComplete() {
+        console.log("Win Counter:" + winCount + " | Loss Counter: " + lossCount + " | Guesses Left: " + numGuesses);
+
+        //check if user won
+        if (lettersinWord.toString() == spacesandSuccesses.toString()) {
+            winCount++;
+            alert("You won");
+            //Update the win couter in the HTML
+            document.getElementById("winCounter").innerHTML = winCount;
+
+            startGame();
+        }
+        //check if user lost
+    }
+
+    //Main Process (Calling)
+
+    //Initiates the code for the first time
+    startGame();
+
+    //Registering key clicks
+    document.onkeyup = function (event) {
+        var lettersinWord = String.fromCharCode(event.keyCode).toLowerCase();
+        checkLetters(lettersinWord);
+        roundComplete();
+
+        console.log(lettersinWord);
     }
 }
-}
-
-
-
